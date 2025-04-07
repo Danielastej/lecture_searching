@@ -64,6 +64,20 @@ def pattern_search_while(sequence, pattern):
         index = index + 1
     return pos
 
+def binary_search(sequence, number):
+    left = 0
+    right = len(sequence - 1)
+    while right >= left:
+        middle = (left + right) // 2
+        print(sequence[middle])
+        if sequence[middle] == number:
+            return middle
+        elif sequence[middle] > number:
+            return middle - 1
+        elif sequence < number:
+            left = middle + 1
+    return None
+
 if __name__ == '__main__':
     my_list = [1, 2, 5, 7]
     searched_number = 5
