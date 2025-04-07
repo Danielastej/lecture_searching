@@ -48,7 +48,7 @@ def pattern_search(sequence, pattern):
             if sequence[idx + idx_pattern] == pattern_element:
                 pattern_similarity = pattern_similarity + 1
             else:
-                pass
+                break
         if pattern_similarity == pattern_lenght:
             set_of_idx.add(idx + pattern_lenght // 2 - 1)
         else:
