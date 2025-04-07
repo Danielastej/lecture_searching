@@ -39,6 +39,31 @@ def main():
     print(my_data)
     found_numbers_linear = linear_search(my_data,0)
 
+def pattern_search(sequence, pattern):
+    set_of_idx = set()
+    pattern_lenght = len(pattern)
+    for idx in range(0, len(sequence) - pattern_lenght):
+        pattern_similarity = 0
+        for idx_pattern, pattern_element in enumerate(pattern):
+            if sequence[idx + idx_pattern] == pattern_element:
+                pattern_similarity = pattern_similarity + 1
+            else:
+                pass
+        if pattern_similarity == pattern_lenght:
+            set_of_idx.add(idx + pattern_lenght // 2 - 1)
+        else:
+            pass
+    return set_of_idx
+
+def pattern_search_while(sequence, pattern):
+    pos = set()
+    index = 0
+    while index < len(sequence) - len(pattern):
+        if sequence[index:index + len(pattern)] == pattern:
+            pos.add(index)
+        index = index + 1
+    return pos
+
 if __name__ == '__main__':
     my_list = [1, 2, 5, 7]
     searched_number = 5
