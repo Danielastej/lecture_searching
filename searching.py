@@ -1,7 +1,6 @@
 import os
 import json
 
-from setuptools.dist import sequence
 
 # get current working directory path
 cwd_path = os.getcwd()
@@ -15,7 +14,7 @@ def read_data(file_name, field):
     :return: (list, string),
     """
     file_path = os.path.join(cwd_path, file_name)
-    with open(file_name, "r") as file:
+    with open(file_path, "r") as file:
         data = json.load(file)
     if field in data.keys():
         return data[field]
@@ -41,16 +40,16 @@ def main():
 
 def pattern_search(sequence, pattern):
     set_of_idx = set()
-    pattern_lenght = len(pattern)
-    for idx in range(0, len(sequence) - pattern_lenght):
+    pattern_length = len(pattern)
+    for idx in range(0, len(sequence) - pattern_length):
         pattern_similarity = 0
         for idx_pattern, pattern_element in enumerate(pattern):
             if sequence[idx + idx_pattern] == pattern_element:
                 pattern_similarity = pattern_similarity + 1
             else:
                 break
-        if pattern_similarity == pattern_lenght:
-            set_of_idx.add(idx + pattern_lenght // 2 - 1)
+        if pattern_similarity == pattern_length:
+            set_of_idx.add(idx + pattern_length // 2 - 1)
         else:
             pass
     return set_of_idx
@@ -66,7 +65,7 @@ def pattern_search_while(sequence, pattern):
 
 def binary_search(sequence, number):
     left = 0
-    right = len(sequence - 1)
+    right = len(sequence) - 1
     while right >= left:
         middle = (left + right) // 2
         print(sequence[middle])
@@ -74,11 +73,12 @@ def binary_search(sequence, number):
             return middle
         elif sequence[middle] > number:
             return middle - 1
-        elif sequence < number:
+        elif sequence[middle] < number:
             left = middle + 1
     return None
 
 if __name__ == '__main__':
+    main()
     my_list = [1, 2, 5, 7]
     searched_number = 5
     found_numbers = linear_search(my_list, searched_number)
