@@ -84,6 +84,15 @@ plt.title("Graf mereni")
 plt.show()
 
 
+def pattern_search(sequence, targetik = 'ATA'):
+    location = []
+    for idx in range(len(sequence)):
+        kodon = sequence[idx:idx + len(targetik)]
+        if kodon == targetik:
+            location.append(idx)
+    return location
+
+
 
 def main():
     sequential_data = read_data('sequential.json', 'unordered_numbers')
@@ -93,6 +102,9 @@ def main():
     ordered_numbers = read_data('sequential.json', 'ordered_numbers')
     binary_searched = binary_search(ordered_numbers, 21)
     print(binary_searched)
+    sequence = read_data('sequential.json', 'dna_sequence')
+    print(pattern_search(sequence))
+
 
 
 if __name__ == "__main__":
