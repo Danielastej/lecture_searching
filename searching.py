@@ -27,12 +27,32 @@ def linear_search(sequence, searched_number = 2):
     return positions, count
 
 
+def binary_search(number_list, searched_number):
+    right = len(number_list)-1
+    left = 0
+    middle = (right+left)//2
+    while left < right:
+        if number_list[middle] == searched_number:
+            return middle
+        elif number_list[middle] < searched_number:
+            left = middle
+            middle = (right+left)//2
+        elif number_list[middle] > searched_number:
+            right = middle
+            middle = (right+left)//2
+    return None
+
+
+
 
 def main():
     sequential_data = read_data('sequential.json', 'unordered_numbers')
     print(sequential_data)
     searching_number = linear_search([2,4,5,8,30,26,5,4,5,5,4,8], 5)
     print(searching_number)
+    ordered_numbers = read_data('sequential.json', 'ordered_numbers')
+    binary_searched = binary_search(ordered_numbers, 21)
+    print(binary_searched)
 
 
 if __name__ == "__main__":
