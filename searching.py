@@ -31,17 +31,57 @@ def binary_search(number_list, searched_number):
     right = len(number_list)-1
     left = 0
     middle = (right+left)//2
-    while left < right:
+    while left <= right:
         if number_list[middle] == searched_number:
             return middle
         elif number_list[middle] < searched_number:
-            left = middle
+            left = middle + 1
             middle = (right+left)//2
         elif number_list[middle] > searched_number:
-            right = middle
+            right = middle - 1
             middle = (right+left)//2
+        else:
+            break
     return None
 
+import time
+import matplotlib.pyplot as plt
+from generators import ordered_sequence
+from generators import unordered_sequence
+from generators import dna_sequence
+
+
+sizes = [100, 500, 1000, 5000, 10000]
+linear_times = []
+binary_times = []
+for i in range(len(sizes)):
+    ordered = ordered_sequence(sizes[i])
+    unordered = unordered_sequence(sizes[i])
+    target = 21
+    start = time.perf_counter()
+
+    linear = linear_search(unordered, target)
+
+    end = time.perf_counter()
+
+    duration = end - start
+    linear_times.append(duration)
+
+
+    start1 = time.perf_counter()
+
+    binary = binary_search(ordered, target)
+
+    end1 = time.perf_counter()
+    duration1 = end1 - start1
+    binary_times.append(duration1)
+
+plt.plot(sizes,linear_times)
+plt.plot(sizes,binary_times)
+plt.xlabel("Velikost vstupu")
+plt.ylabel("Čas [s]")
+plt.title("Graf mereni")
+plt.show()
 
 
 
